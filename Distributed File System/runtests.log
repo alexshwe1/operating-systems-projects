@@ -1,0 +1,1355 @@
+('starting', 'build')
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+Trying to build project using make
+make
+make: Nothing to be done for 'all'.
+
+
+test build PASSED
+ (build project using make)
+
+('starting', 'shutdown')
+
+**********************************************************************
+
+Test shutdown
+init server and client then call shutdown
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9749
+/tmp/tmpv9KA9U/p/server 9749 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 d/^`ÿ
+-1 d/^`ÿ
+-1 
+-1  0^`ÿ
+-1 7
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+('starting', 'creat')
+
+**********************************************************************
+
+Test creat
+creat a file and check with lookup
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6756
+/tmp/tmpv9KA9U/p/server 6756 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ¤?åþ
+-1 
+-1 `?åþ
+-1 ðH!
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+('starting', 'write')
+
+**********************************************************************
+
+Test write
+write then read one block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7170
+/tmp/tmpv9KA9U/p/server 7170 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 d<Kiÿ
+-1 
+-1  =Kiÿ
+-1 ðH!
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(WRITE)]
+LINE 156
+RIGHT BEFORE WRITE MEMCPY
+m.buffer: START BLOCK 1
+m.nbytes: 4096
+RIGHT AFTER WRITE MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(READ)]
+RIGHT BEFORE READ MEMCPY
+m.nbytes: 4096
+RIGHT AFTER READ MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+nbytes: 4096
+buffer: START BLOCK 1
+size of read_buffer: 13
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+
+
+test write PASSED
+ (write then read one block)
+
+('starting', 'stat')
+
+**********************************************************************
+
+Test stat
+stat a regular file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6033
+/tmp/tmpv9KA9U/p/server 6033 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ð*—Ëu
+-1 P‰“Ëu
+-1  j“Ëu
+-1 \oËu
+-1 
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(STAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(STAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(WRITE)]
+LINE 156
+RIGHT BEFORE WRITE MEMCPY
+m.buffer: START BLOCK 1
+m.nbytes: 4096
+RIGHT AFTER WRITE MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(STAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test stat PASSED
+ (stat a regular file)
+
+('starting', 'overwrite')
+
+**********************************************************************
+
+Test overwrite
+overwrite a block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5172
+/tmp/tmpv9KA9U/p/server 5172 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ð:dU
+-1 P™`U
+-1  z`U
+-1 l<U
+-1 
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(WRITE)]
+LINE 156
+RIGHT BEFORE WRITE MEMCPY
+m.buffer: START BLOCK 1
+m.nbytes: 4096
+RIGHT AFTER WRITE MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(READ)]
+RIGHT BEFORE READ MEMCPY
+m.nbytes: 4096
+RIGHT AFTER READ MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(WRITE)]
+LINE 156
+RIGHT BEFORE WRITE MEMCPY
+m.buffer: START BLOCK 2
+m.nbytes: 4096
+RIGHT AFTER WRITE MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(READ)]
+RIGHT BEFORE READ MEMCPY
+m.nbytes: 4096
+RIGHT AFTER READ MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+nbytes: 4096
+buffer: START BLOCK 1
+size of read_buffer: 13
+nbytes: 4096
+buffer: START BLOCK 2
+size of read_buffer: 13
+
+
+test overwrite PASSED
+ (overwrite a block)
+
+('starting', 'maxfile')
+
+**********************************************************************
+
+Test maxfile
+write largest possible file
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6853
+/tmp/tmpv9KA9U/p/server 6853 /home/shwe/Documents/CS537/p4/test.img
+nbytes: 4096
+buffer: START BLOCK 1
+size of read_buffer: 13
+Failure: Corrupt data returned by read
+
+
+test maxfile FAILED
+ (write largest possible file)
+ Corrupt data returned by read
+
+('starting', 'maxfile2')
+
+**********************************************************************
+
+Test maxfile2
+write more blocks than possible
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8035
+/tmp/tmpv9KA9U/p/server 8035 /home/shwe/Documents/CS537/p4/test.img
+31
+write more than need
+Failure: MFS_Write should fail on inalid block number
+
+
+test maxfile2 FAILED
+ (write more blocks than possible)
+ MFS_Write should fail on inalid block number
+
+('starting', 'dir1')
+
+**********************************************************************
+
+Test dir1
+check root for dot entries
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9665
+/tmp/tmpv9KA9U/p/server 9665 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 Péš)
+-1  Êš)
+-1 ¼v)
+-1 
+-1 7
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test dir1 PASSED
+ (check root for dot entries)
+
+('starting', 'dir2')
+
+**********************************************************************
+
+Test dir2
+create a new directory and check it
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9177
+/tmp/tmpv9KA9U/p/server 9177 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ¤ù
+`þ
+-1 ¤ù
+`þ
+-1 
+-1 `ú
+`þ
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 testdir
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 1
+blocknum 5
+  1 .
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 1
+blocknum 5
+  1 .
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+('starting', 'baddir')
+
+**********************************************************************
+
+Test baddir
+try to create a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7659
+/tmp/tmpv9KA9U/p/server 7659 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ðŠµÍ
+-1 PéµÍ
+-1  ÊµÍ
+-1 ¼ä´Í
+-1 
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 testdir
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+('starting', 'baddir2')
+
+**********************************************************************
+
+Test baddir2
+try to lookup a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9402
+/tmp/tmpv9KA9U/p/server 9402 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 ¤U«Hÿ
+-1 ¤U«Hÿ
+-1 
+-1 `V«Hÿ
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 testdir
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+('starting', 'unlink')
+
+**********************************************************************
+
+Test unlink
+unlink a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9557
+/tmp/tmpv9KA9U/p/server 9557 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 P©ÙŽ@
+-1  ŠÙŽ@
+-1 |µŽ@
+-1 
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(UNLINK)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  -1 test
+  -1  ŠÙŽ@
+  -1 |µŽ@
+  -1 
+  -1 7
+  -1 À³*0ÿ
+  -1 0³*0ÿ
+  -1 
+  -1  ÙŽ@
+  -1 
+  -1 ÿÿÿÿ
+  -1 
+  -1 ð
+  -1 p…ÙŽ@
+  -1 àRÝŽ@
+  -1 `¨ÙŽ@
+  -1 @¾*0ÿ
+  -1 
+  -1 
+  -1  RÝŽ@
+  -1 
+  -1 @
+  -1 PŸ
+  -1 
+  -1 
+  -1 GLIBC_PRIVATE
+  -1 early_init
+  -1 `
+  -1 
+  -1 
+  -1 
+  -1 ðJÝŽ@
+  -1  ÙŽ@
+  -1 ðJÝŽ@
+  -1 P©ÙŽ@
+  -1  ŠÙŽ@
+  -1 h|µŽ@
+  -1 
+  -1 €
+  -1 
+  -1 p·*0ÿ
+  -1 
+  -1  ÙŽ@
+  -1 
+  -1 ÿÿÿÿ
+  -1 
+  -1 Råtd
+  -1 p…ÙŽ@
+  -1 @@ÝŽ@
+  -1 ©ÙŽ@
+  -1 
+  -1 
+  -1 àRÝŽ@
+  -1 
+  -1 
+  -1 
+  -1 àRÝŽ@
+  -1 
+  -1 
+  -1 
+  -1 early_init
+  -1 `
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 P–¶Ž@
+  -1 Pº*0ÿ
+  -1 
+  -1 ¢
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 p…ÙŽ@
+  -1 ÙŽ@
+  -1 p…ÙŽ@
+  -1 P–¶Ž@
+  -1  ŠÙŽ@
+  -1 Ø¨ÙŽ@
+  -1 
+  -1 
+  -1 ¾*0ÿ
+  -1 ð¼*0ÿ
+  -1 	
+  -1 ÙŽ@
+  -1 
+  -1 ÿÿÿÿ
+  -1 
+  -1 
+  -1 €¾*0ÿ
+  -1 ðJÝŽ@
+  -1 ˜0¶Ž@
+  -1 `?ÝŽ@
+  -1 ØºÙŽ@
+  -1 ¬ÙŽ@
+  -1 Ø¨ÙŽ@
+  -1 @
+  -1 
+  -1 
+  -1 ////////////////////////////ÿÿÿÿ
+  -1 
+  -1 ocuments/CS537/p4/mkfs
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test unlink PASSED
+ (unlink a file)
+
+('starting', 'unlink2')
+
+**********************************************************************
+
+Test unlink2
+unlink a directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6155
+/tmp/tmpv9KA9U/p/server 6155 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 dUî¾ü
+-1 
+-1  Vî¾ü
+-1 ðH!
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(UNLINK)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  -1 test
+  -1 
+  -1  Vî¾ü
+  -1 ðH!
+  -1 7
+  -1 à˜‘Ý%
+  -1 
+  -1 
+  -1 P~"
+  -1 
+  -1 `¸‘Ý%
+  -1 
+  -1 ð
+  -1 øÿÿÿÿÿÿÿ@mÝ%
+  -1 
+  -1 àb•Ý%
+  -1 øÿÿÿÿÿÿÿ®“Ý%
+  -1 @µvÝ%
+  -1 
+  -1  b•Ý%
+  -1 
+  -1 @
+  -1 PŸ
+  -1 
+  -1 ÿÿÿÿÿÿÿÿÿÿÿÿÿ
+  -1 _
+  -1 ˜
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 äU0
+  -1 %
+  -1 ¤Yî¾ü
+  -1 ¤Yî¾ü
+  -1 
+  -1 `Zî¾ü
+  -1 
+  -1 €
+  -1 à˜‘Ý%
+  -1 
+  -1 
+  -1 0
+  -1 
+  -1 ¹‘Ý%
+  -1 
+  -1 Råtd
+  -1 JrÁ¦U
+  -1 
+  -1 
+  -1 JrÁ¦U
+  -1 øeî¾ü
+  -1 @’Ý%
+  -1 
+  -1 
+  -1 
+  -1 àb•Ý%
+  -1 
+  -1 
+  -1 _
+  -1 ˜
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 P¦nÝ%
+  -1 `]î¾ü
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 p•‘Ý%
+  -1  ‘Ý%
+  -1 p•‘Ý%
+  -1 P¦nÝ%
+  -1  š‘Ý%
+  -1 Ø¸‘Ý%
+  -1 
+  -1 
+  -1 aî¾ü
+  -1 
+  -1 	
+  -1  ‘Ý%
+  -1 
+  -1 ÿÿÿÿ
+  -1 
+  -1 
+  -1 aî¾ü
+  -1 ðZ•Ý%
+  -1 ˜@nÝ%
+  -1 `O•Ý%
+  -1 ØÊ‘Ý%
+  -1 ¼‘Ý%
+  -1 Ø¸‘Ý%
+  -1 @
+  -1 
+  -1 
+  -1 ////////////////
+  -1 
+  -1 4/mkfs
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+  -1 
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test unlink2 PASSED
+ (unlink a directory)
+
+('starting', 'empty')
+
+**********************************************************************
+
+Test empty
+unlink a non-empty directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8008
+/tmp/tmpv9KA9U/p/server 8008 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 PÎ $
+-1  úÍ $
+-1 ì© $
+-1 
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 testdir
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 1
+blocknum 5
+  1 .
+  2 testfile
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(UNLINK)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(UNLINK)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(UNLINK)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+('starting', 'name')
+
+**********************************************************************
+
+Test name
+name too long
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5959
+/tmp/tmpv9KA9U/p/server 5959 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 dGK&ý
+-1 dGK&ý
+-1 
+-1  HK&ý
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+
+
+test name PASSED
+ (name too long)
+
+('starting', 'persist')
+
+**********************************************************************
+
+Test persist
+restart server after creating a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7734
+/tmp/tmpv9KA9U/p/server 7734 /home/shwe/Documents/CS537/p4/test.img
+inode bitmap address 1 [len 1]
+data bitmap address 2 [len 1]
+inode region address 3 [len 1]
+data region address 4 [len 32]
+
+number of inodes:32 number of data blocks:32
+
+root type:0 root size:64
+direct pointers[0]:4 [1]:-1
+
+root dir entries
+0 .
+0 ..
+-1 $~©Wý
+-1 $~©Wý
+-1 
+-1 à~©Wý
+-1 7
+
+server:: waiting...
+server:: read message [call:(CREAT)]
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(WRITE)]
+LINE 156
+RIGHT BEFORE WRITE MEMCPY
+m.buffer: START BLOCK 1
+m.nbytes: 4096
+RIGHT AFTER WRITE MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(LOOKUP)]
+searching in dir with inode: 0
+blocknum 4
+  1 test
+blocknum -1
+server:: reply
+
+server:: waiting...
+server:: read message [call:(READ)]
+RIGHT BEFORE READ MEMCPY
+m.nbytes: 4096
+RIGHT AFTER READ MEMCPY
+server:: reply
+
+server:: waiting...
+server:: read message [call:(SHUTDOWN)]
+nbytes: 4096
+buffer: START BLOCK 1
+size of read_buffer: 13
+Starting server on port 7734
+/tmp/tmpv9KA9U/p/server 7734 /home/shwe/Documents/CS537/p4/test.img
+OSError: [Errno 3] No such process
+
+
+test persist FAILED
+ (restart server after creating a file)
+ Unexpected exception [Errno 3] No such process
+
+('starting', 'bigdir')
+
+**********************************************************************
+
+Test bigdir
+create a directory with 126 files
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7034
+/tmp/tmpv9KA9U/p/server 7034 /home/shwe/Documents/CS537/p4/test.img
+Failure: MFS_Creat returned failure inum=1 type=1 name='0'
+
+
+test bigdir FAILED
+ (create a directory with 126 files)
+ MFS_Creat returned failure inum=1 type=1 name='0'
+
+('starting', 'deep')
+
+**********************************************************************
+
+Test deep
+create many deeply nested directories
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8763
+/tmp/tmpv9KA9U/p/server 8763 /home/shwe/Documents/CS537/p4/test.img
+Failure: MFS_Creat returned failure inum=1 type=0 name='0'
+
+
+test deep FAILED
+ (create many deeply nested directories)
+ MFS_Creat returned failure inum=1 type=0 name='0'
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build project using make)
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+test write PASSED
+ (write then read one block)
+
+test stat PASSED
+ (stat a regular file)
+
+test overwrite PASSED
+ (overwrite a block)
+
+test maxfile FAILED
+ (write largest possible file)
+ Corrupt data returned by read
+
+test maxfile2 FAILED
+ (write more blocks than possible)
+ MFS_Write should fail on inalid block number
+
+test dir1 PASSED
+ (check root for dot entries)
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+test unlink PASSED
+ (unlink a file)
+
+test unlink2 PASSED
+ (unlink a directory)
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+test name PASSED
+ (name too long)
+
+test persist FAILED
+ (restart server after creating a file)
+ Unexpected exception [Errno 3] No such process
+
+test bigdir FAILED
+ (create a directory with 126 files)
+ MFS_Creat returned failure inum=1 type=1 name='0'
+
+test deep FAILED
+ (create many deeply nested directories)
+ MFS_Creat returned failure inum=1 type=0 name='0'
+
+Passed 14 of 19 tests.
+Overall 14 of 19
