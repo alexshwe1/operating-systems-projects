@@ -4,7 +4,7 @@
 Sorting, or alphabetizing as we called it as a child, is still a
 critical task for data-intensive applications, including databases,
 spreadsheets, and many other data-oriented applications. In this
-project, I be built a high-performance parallel sort. 
+project, I built a high-performance parallel sort. 
 
 There were three specific objectives to this assignment:
 
