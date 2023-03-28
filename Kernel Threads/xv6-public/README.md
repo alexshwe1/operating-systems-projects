@@ -1,7 +1,7 @@
 
 # Kernel Threads
 
-In this project, I be added real kernel threads to xv6. Specifically, 
+In this project, I added real kernel threads to xv6. Specifically, 
 I do three things. First, I define a new system call
 to create a kernel thread, called `clone()`, as well as one to wait for a
 thread called `join()`. Then, I use `clone()` to build a little thread
